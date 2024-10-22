@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Expense Tracker</title>
+</head>
+<body class="container-fluid w-full flex items-start justify-center">
+
+    <div class="flex flex-col justify-start items-center min-w-[500px] max-w-[700px] h-screen mt-[15vh]">
+
+        <span class="text-3xl font-extrabold my-2">Expense Tracker</span>
+
+        <div id="data" class="flex flex-col items-center justify-center w-full px-5 gap-2">
+            <input type="text" placeholder="Expense Description" name="desc" id="desc" class="w-full rounded-lg p-2 text-lg border-2 border-gray-500" required>
+            <select name="category" id="category" class="w-full rounded-lg p-2 text-lg border-2 border-gray-500" required>
+                <option value="" selected>Please Select</option>
+                <option value="travel">Travel</option>
+                <option value="grocery">Grocery</option>
+                <option value="electronic">Electronic</option>
+                <option value="miscellaneous">Miscellaneous</option>
+            </select>
+            <input type="number" placeholder="Amount" name="amount" id="amount" class="w-full rounded-lg p-2 text-lg border-2 border-gray-500" required>
+
+            <input type="submit" name="submit" value="Add Expense" id="btn" class="w-full rounded-lg p-2 text-lg bg-gray-500">
+        </div>
+
+        <div class="summery w-full">
+            <div class="w-full flex flex-col justify-center items-center px-5">
+                <span class="text-2xl font-semibold mt-10">Expense Summery</span>
+                <table class="w-full table px-5">
+                    <thead class="w-full bg-gray-500">
+                        <tr class="border-2 rounded-lg text-lg">
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summery_data" class="w-full">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const desc = document.getElementById("desc");
+        const category = document.getElementById("category");
+        const amount = document.getElementById("amount");
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener('click',(e)=>{
+            let desc_value = desc.value;
+            let category_value = category.value;
+            let amount_value = amount.value;
+
+            if(desc_value==''){
+                alert('Please Enter Expense Description')
+                return
+            }else if(category_value==''){
+                alert('Please Select Category')
+                return
+            }else if(amount_value==0){
+                alert('Please Enter Amount')
+                return
+            }
+
+            const summery_data = document.getElementById("summery_data");
+
+            const new_tr = document.createElement('tr');
+            new_tr.classList.add('bg-gray-200','font-bold');
+            const new_td1 = document.createElement('td');
+            new_td1.classList.add('text-center')
+            new_td1.innerText = desc_value
+            const new_td2 = document.createElement('td');
+            new_td2.classList.add('text-center')
+            new_td2.innerText = category_value
+            const new_td3 = document.createElement('td');
+            new_td3.classList.add('text-center')
+            new_td3.innerText = amount_value;
+
+            new_tr.appendChild(new_td1);
+            new_tr.appendChild(new_td2);
+            new_tr.appendChild(new_td3);
+            summery_data.appendChild(new_tr);
+
+
+            desc.value = '';
+            category.value = '';
+            amount.value = '';
+
+        })
+
+
+
+
+    </script>
+</body>
+</html>
